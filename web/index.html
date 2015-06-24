@@ -1,0 +1,322 @@
+<!DOCTYPE html> 
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]--> 
+<html class="no-js" lang="en" >
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Mathematics</title>
+		<!--link rel="stylesheet" type="text/css" href="css/libs/font-awesome/css/font-awesome.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/libs/pure/pure-min.css" />
+		<link rel="stylesheet" type="text/css" href="css/libs/pure/grids-responsive-min.css" /-->
+		<!--link rel="stylesheet" href="css/libs/normalize.css">
+		<link rel="stylesheet" href="css/libs/foundation.min.css"-->
+		<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection" />
+		<link rel="stylesheet" href="css/app.css">
+		<!--script src="js/libs/modernizr.js">;</script-->
+		
+	</head> 
+	<body>
+		<header>
+			<ul id="dropdown1" class="dropdown-content">
+				<li><a href="#quantity">Quantities</a></li>
+				<li><a href="#mixed">Mixed</a></li>
+				<li><a href="#improper">Improper</a></li>
+				<li><a href="#simplifying">Simplifying</a></li>
+				<li><a href="#compare">Compare</a></li>
+				<li><a href="#addsub">Add&Sub</a></li>
+				<li><a href="#multdiv">Mult&Div</a></li>
+			</ul>
+			<nav>
+				<div class="nav-wrapper blue-grey darken-2">
+					<div class="col s12">
+						<a href="#!" class="brand-logo right">MATHEMATICS</a>
+						<ul id="nav-mobile" class="left side-nav">
+							<li><a href="#index">Home</a></li>
+							<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Fractions<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+						</ul>
+					</div>
+					<a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
+				</div>
+			</nav>
+		</header>
+
+		<main>
+			<div class="container">
+				<div id="view" class="row">
+			</div>
+		</main>
+
+		<!-- Modal Structure -->
+		<div id="modal1" class="modal">
+			<h2>You score is <span id="result"></span></h2>
+			<a href="#" class="waves-effect btn-flat modal-close">Close</a>
+		</div>
+
+		<!-- templates -->
+		<script id="index-view" type="text/template">
+			<h1>Fractions</h1>
+			<ul class="collection orange darken-2">
+				<li class="collection-item"><a href="#quantity" class="white-text">Fractions of quantities</a></li>
+				<li class="collection-item"><a href="#mixed" class="white-text">Mixed numbers to improper fractions</a></li>
+				<li class="collection-item"><a href="#mixed" class="white-text">Improper fractions to mixed numbers</a></li>
+				<li class="collection-item"><a href="#simplifying" class="white-text">Simplifying fractions</a></li>
+				<li class="collection-item"><a href="#compare" class="white-text">Compare fractions</a></li>
+				<li class="collection-item"><a href="#addsub" class="white-text">Adding & Substracting fractions</a></li>
+				<li class="collection-item"><a href="#multdiv" class="white-text">Multiplying & Dividing fractions</a></li>
+			</ul>
+		</script>
+
+		<script id="exercizes-view" type="text/template">
+			<div class="col s12 m3 l2 rowhead"><a class="waves-effect waves-light btn-large orange darken-2 refresh">Refresh</a></div>
+			<div class="col s12 m6 l8 rowhead"><h3><span class="grey-text darken-3" style="font-weight:600;"><%= title %></span></h3></div>
+			<div class="col s12 m3 l2 rowhead"><a class="waves-effect waves-light btn-large orange darken-2 check">Check</a></div>
+		</script>
+
+		<script id="simplifying-exercize-view" type="text/template">
+			<div class="col s12 m6 l4">
+				<div class="card-panel blue-grey">
+					<table class="exercize-card">
+						<tr>
+							<td class="fraction">
+								<span class="white-text"><%= question.numerator %></span>
+								<hr/>
+								<span class="white-text"><%= question.denominator %></span>
+							</td>
+							<td class="whole"><span class="white-text"> = </span></td>
+							<td class="fraction">
+								<span><input class="numerator" type="text" value="" size="2" /></span>
+								<hr/>
+								<span><input class="denominator" type="text" value="" size="2" /></span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</script>
+
+		<script id="mixed-exercizes-view" type="text/template">
+			<div class="col s12 m3 l2 rowhead"><a class="waves-effect waves-light btn-large orange darken-4 refresh">Refresh</a></div>
+			<div class="col s12 m6 l8 rowhead"><h3><span class="grey-text darken-4">Transform mixed</span></h3></div>
+			<div class="col s12 m3 l2 rowhead"><a class="waves-effect waves-light btn-large orange check">Check</a></div>
+		</script>
+
+		<script id="mixed-exercize-view" type="text/template">
+			<div class="col s12 m6 l4">
+				<div class="card-panel blue-grey">
+					<table class="exercize-card">
+						<tr>
+							<td class="whole" style="text-align:right;">
+								<span class="white-text"><%= question.wholenumber %></span>
+							</td>
+							<td class="fraction">
+								<span class="white-text"><%= question.numerator %></span>
+								<hr/>
+								<span class="white-text"><%= question.denominator %></span>
+							</td>
+							<td class="whole"><span class="white-text"> = </span></td>
+							<td class="fraction">
+								<span><input class="numerator" type="text" value="" size="2" /></span>
+								<hr/>
+								<span><input class="denominator" type="text" value="" size="2" /></span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</script>
+
+		<script id="improper-exercizes-view" type="text/template">
+			<div class="col s12 m3 l2 rowhead"><a class="waves-effect waves-light btn-large orange refresh">Refresh</a></div>
+			<div class="col s12 m6 l8 rowhead"><h3><span class="grey-text darken-4">Transform improper</span></h3></div>
+			<div class="col s12 m3 l2 rowhead"><a class="waves-effect waves-light btn-large orange check">Check</a></div>
+		</script>
+
+		<script id="improper-exercize-view" type="text/template">
+			<div class="col s12 m6 l4">
+				<div class="card-panel blue-grey">
+					<table class="exercize-card">
+						<tr>
+							<td class="fraction">
+								<span class="white-text"><%= question.numerator %></span>
+								<hr/>
+								<span class="white-text"><%= question.denominator %></span>
+							</td>
+							<td class="whole"><span class="white-text"> = </span></td>
+							<td class="whole" style="text-align:right;">
+								<input class="wholenumber" type="text" value="" size="2" />
+							</td>
+							<td class="fraction">
+								<span><input class="numerator" type="text" value="" size="2" /></span>
+								<hr/>
+								<span><input class="denominator" type="text" value="" size="2" /></span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</script>
+
+		<script id="quantity-exercizes-view" type="text/template">
+			<div class="col s12 m3 l2 rowhead"><a class="waves-effect waves-light btn-large orange refresh">Refresh</a></div>
+			<div class="col s12 m6 l8 rowhead"><h3><span class="grey-text darken-4">Fractions of quantities</span></h3></div>
+			<div class="col s12 m3 l2 rowhead"><a class="waves-effect waves-light btn-large orange check">Check</a></div>
+		</script>
+
+		<script id="quantity-exercize-view" type="text/template">
+			<div class="col s12 m6 l4">
+				<div class="card-panel blue-grey">
+					<table class="exercize-card">
+						<tr>
+							<td class="fraction">
+								<span class="white-text"><%= question.numerator %></span>
+								<hr/>
+								<span class="white-text"><%= question.denominator %></span>
+							</td>
+							<td class="whole"><span class="white-text"> of </span></td>
+							<td class="whole">
+								<span class="white-text"><%= question.quantity %></span>
+							</td>
+							<td class="sign"><span class="white-text"> = </span></td>
+							<td class="whole" style="text-align:right;">
+								<input class="part" type="text" value="" size="2" />
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</script>
+
+		<script id="compare-exercizes-view" type="text/template">
+			<div class="col s12 m3 l2 rowhead"><a class="waves-effect waves-light btn-large orange refresh">Refresh</a></div>
+			<div class="col s12 m6 l8 rowhead"><h3><span class="grey-text darken-4">Compare fractions</span></h3></div>
+			<div class="col s12 m3 l2 rowhead"><a class="waves-effect waves-light btn-large orange check">Check</a></div>
+		</script>
+
+		<script id="compare-exercize-view" type="text/template">
+			<div class="col s12 m6 l4">
+				<div class="card-panel blue-grey">
+					<table class="exercize-card">
+						<tr>
+							<td class="fraction">
+								<span class="white-text"><%= first.numerator %></span>
+								<hr/>
+								<span class="white-text"><%= first.denominator %></span>
+							</td>
+							<td class="whole">
+								<input class="sign" type="text" value="" size="1" />
+							</td>
+							<td class="fraction">
+								<span class="white-text"><%= second.numerator %></span>
+								<hr/>
+								<span class="white-text"><%= second.denominator %></span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</script>
+
+		<script id="addsub-exercize-view" type="text/template">
+			<div class="col s12 m6 l6">
+				<div class="card-panel blue-grey">
+					<table class="exercize-card">
+						<tr>
+							<td class="whole">
+								<% if (first.wholenumber) { %>
+									<span class="white-text"><%= first.wholenumber %></span>
+								<% } %>
+							</td>
+							<td class="fraction">
+								<% if (first.numerator != first.denominator) { %>
+									<span class="white-text"><%= first.numerator %></span>
+									<hr/>
+									<span class="white-text"><%= first.denominator %></span>
+								<% } %>
+							</td>
+							<td class="whole"><span class="white-text"> <%= sign %> </span></td>
+							<td class="whole">
+								<% if (second.wholenumber) { %>
+									<span class="white-text"><%= second.wholenumber %></span></td>
+								<% } %>
+							</td>
+							<td class="fraction">
+								<% if (second.numerator != second.denominator) { %>
+									<span class="white-text"><%= second.numerator %></span>
+									<hr/>
+									<span class="white-text"><%= second.denominator %></span>
+								<% } %>
+							</td>
+							<td class="whole"><span class="white-text"> = </span></td>
+							<td class="whole">
+								<input class="wholenumber" type="text" value="" size="2" />
+							</td>
+							<td class="fraction">
+								<span><input class="numerator" type="text" value="" size="2" /></span>
+								<hr/>
+								<span><input class="denominator" type="text" value="" size="2" /></span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</script>
+
+		<script id="multdiv-exercize-view" type="text/template">
+			<div class="col s12 m6 l6">
+				<div class="card-panel blue-grey">
+					<table class="exercize-card">
+						<tr>
+							<td class="whole">
+								<% if (first.wholenumber) { %>
+									<span class="white-text"><%= first.wholenumber %></span>
+								<% } %>
+							</td>
+							<td class="fraction">
+								<% if (first.numerator != first.denominator) { %>
+									<span class="white-text"><%= first.numerator %></span>
+									<hr/>
+									<span class="white-text"><%= first.denominator %></span>
+								<% } %>
+							</td>
+							<td class="whole"><span class="white-text"> <%= sign %> </span></td>
+							<td class="whole">
+								<% if (second.wholenumber) { %>
+									<span class="white-text"><%= second.wholenumber %></span></td>
+								<% } %>
+							<td class="fraction">
+								<% if (second.numerator != second.denominator) { %>
+									<span class="white-text"><%= second.numerator %></span>
+									<hr/>
+									<span class="white-text"><%= second.denominator %></span>
+								<% } %>
+							</td>
+							<td class="whole"><span class="white-text"> = </span></td>
+							<td class="whole">
+								<input class="wholenumber" type="text" value="" size="2" />
+							</td>
+							<td class="fraction">
+								<span><input class="numerator" type="text" value="" size="2" /></span>
+								<hr/>
+								<span><input class="denominator" type="text" value="" size="2" /></span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</script>
+
+		<script src="js/libs/jquery.js">;</script> 
+		<script type="text/javascript" src="js/libs/underscore-min.js">;</script>
+		<script type="text/javascript" src="js/libs/backbone-min.js">;</script>
+		<script type="text/javascript" src="js/materialize.min.js"></script>
+		<!--script src="js/libs/foundation.min.js">;</script--> 
+		<script src="js/app.js">;</script> 
+		<!--script> $(document).foundation(); </script--> 
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$(".dropdown-button").dropdown({ hover: false });
+				$(".button-collapse").sideNav();
+			})
+		</script>
+	</body>
+</html>
